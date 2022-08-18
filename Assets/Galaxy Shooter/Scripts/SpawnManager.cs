@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject[] powerups;
     // Start is called before the first frame update
+    private int enemyCount = 2;
     void Start()
     {
         StartCoroutine(enemySpawnRoutine());
@@ -16,9 +17,10 @@ public class SpawnManager : MonoBehaviour
     }
 
     private IEnumerator enemySpawnRoutine(){
-       while(true){
+       while(enemyCount < 2){
          Instantiate(enemy,new Vector3(Random.Range(-8.3223f,8.2421f),5.5f,0),Quaternion.identity);
-        yield return new WaitForSeconds(3);
+         enemyCount++;
+        yield return new WaitForSeconds(5);
        }
     }
 

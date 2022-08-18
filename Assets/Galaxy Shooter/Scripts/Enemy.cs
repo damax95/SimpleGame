@@ -18,8 +18,7 @@ public class Enemy : MonoBehaviour
     {
         transform.Translate(Vector3.down*speed*Time.deltaTime);
         if(transform.position.y < -5.5f){
-            float x = Random.Range(-8.3223f,8.2421f);
-            transform.position = new Vector3(x,5.5f,0);
+            resetPos();
         }
         
     }
@@ -31,16 +30,21 @@ public class Enemy : MonoBehaviour
             Laser laser = obj.GetComponent<Laser>();
             if(laser != null) laser.die();
             Instantiate(enemyExplosion,transform.position,Quaternion.identity);
-            Destroy(this.gameObject);
+            resetPos();
             break;
 
             case "Player":
             Player player = obj.GetComponent<Player>();
             if(player != null) player.die(1.0f);
             Instantiate(enemyExplosion,transform.position,Quaternion.identity);
-            Destroy(this.gameObject);
+            resetPos();
             break;
         }
+    }
+
+    private void resetPos(){
+        float x = Random.Range(-8.3223f,8.2421f);
+        transform.position = new Vector3(x,5.5f,0);
     }
 
 
